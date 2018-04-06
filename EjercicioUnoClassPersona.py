@@ -1,4 +1,5 @@
 from EjercicioUnoClassChequeoCorporal import ChequeoCorporal
+import datetime
 
 class Persona(object):
 
@@ -32,3 +33,66 @@ class Persona(object):
                 cantidadPesos += 1
 
         promedioAnual = sumaPeso/cantidadPesos
+        return promedioAnual
+
+    def getAlturaPromedio(self, año):
+        sumaAltura = 0
+        cantidadMediciones = 0
+
+        for item in self.listaChequeoCorporal:
+            if item.fechaMedicion.year == año:
+                sumaAltura += item.altura
+                cantidadMediciones += 1
+
+        promedioAnual = sumaAltura / cantidadMediciones
+        return promedioAnual
+
+    def getPorcentajeCrecimientoPeso(self, primerAño, ultimoAño):
+        listaDelPrimerAño = []
+        listaDelUltimoAño = []
+
+        for item in self.listaChequeoCorporal:
+            if item.fechaMedicion.year == primerAño:
+                listaDelPrimerAño.append(item.fechaMedicion)
+            elif item.fechaMedicion.year == ultimoAño:
+                listaDelUltimoAño.append(item.fechaMedicion)
+
+        ultimaFechaDelPrimerAño = max(listaDelPrimerAño)
+        ultimaFechaDelUltimoAño = max(listaDelUltimoAño)
+
+        pesoPrimerAño = 0
+        pesoUltimoAño = 0
+
+        for item in self.listaChequeoCorporal:
+            if item.fechaMedicion == ultimaFechaDelPrimerAño:
+                pesoPrimerAño = item.peso
+            elif item.fechaMedicion == ultimaFechaDelUltimoAño:
+                pesoUltimoAño = item.peso
+
+        porcentajeDeCrec = ((pesoUltimoAño * 100)/pesoPrimerAño) - 100
+        return porcentajeDeCrec
+
+    def getPorcentajeCrecimientoAltura(self, primerAño, ultimoAño):
+        listaDelPrimerAño = []
+        listaDelUltimoAño = []
+
+        for item in self.listaChequeoCorporal:
+            if item.fechaMedicion.year == primerAño:
+                listaDelPrimerAño.append(item.fechaMedicion)
+            elif item.fechaMedicion.year == ultimoAño:
+                listaDelUltimoAño.append(item.fechaMedicion)
+
+        ultimaFechaDelPrimerAño = max(listaDelPrimerAño)
+        ultimaFechaDelUltimoAño = max(listaDelUltimoAño)
+
+        alturaPrimerAño = 0
+        alturaUltimoAño = 0
+
+        for item in self.listaChequeoCorporal:
+            if item.fechaMedicion == ultimaFechaDelPrimerAño:
+                alturaPrimerAño = item.altura
+            elif item.fechaMedicion == ultimaFechaDelUltimoAño:
+                alturaUltimoAño = item.altura
+
+        porcentajeDeCrec = ((alturaUltimoAño * 100) / alturaPrimerAño) - 100
+        return porcentajeDeCrec

@@ -1,3 +1,4 @@
+
 class ChequeoCorporal(object):
 
     def __init__(self, altura = None, peso = None, fechaMedicion = None):
